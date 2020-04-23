@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Blu Hangers</string>
+    <string name="label_logo">BluHangers</string>
+    <string name="label_slogan">Kelola laundry lebih mudah</string>
+    <string name="label_edit_username">Nama Pengguna</string>
+    <string name="label_edit_password">Kata Sandi</string>
+    <string name="label_edit_nama_lengkap">Nama Lengkap</string>
+    <string name="edt_edit_re_password">Ulang kata sandi</string>
+    <string name="label_register">Daftar</string>
+    <string name="label_login">Masuk</string>
+    <string name="label_pertanyaan_register">Belum punya akun ?</string>
+    <string name="label_pertanyaan_login">Sudah punya akun ?</string>
+    <string name="label_sync_desc">Kasih tau kami outlet kamu ya!</string>
+    <string name="label_sync">Sinkronisasi Outlet</string>
+    <string name="label_hint_email">contoh@gmail.com</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_nama_panggilan">Nama Panggilan</string>
+    <string name="label_pilih_outlet">Pilih Outlet</string>
+    <string name="label_pertanyaan_register_outlet">Tidak menemukan outlet kamu ?</string>
+    <string name="label_register_outlet">Register Outlet</string>
+</resources>

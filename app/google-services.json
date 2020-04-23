@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "873262064808",
+    "firebase_url": "https://blu-hangers.firebaseio.com",
+    "project_id": "blu-hangers",
+    "storage_bucket": "blu-hangers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873262064808:android:1ab450d934612d73414e9d",
+        "android_client_info": {
+          "package_name": "com.zealous.bluhangers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873262064808-10md0c6unm91162hfd583rv551j0lvlr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlseK6wXmibCWUzBzr8MJJ2oPle_7cYRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873262064808-10md0c6unm91162hfd583rv551j0lvlr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

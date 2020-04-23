@@ -1,0 +1,2 @@
+rootProject.name='Blu Hangers'
+include ':app'
