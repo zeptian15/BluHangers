@@ -1,18 +1,13 @@
 package com.zealous.bluhangers.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.zealous.bluhangers.R
 import com.zealous.bluhangers.databinding.ActivityLoginBinding
 import com.zealous.bluhangers.utils.LoadingDialog
 import com.zealous.bluhangers.utils.toast
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
 
 class LoginActivity : AppCompatActivity(), AuthListener
 {

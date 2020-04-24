@@ -30,19 +30,20 @@
             android:layout_marginLeft="10dp"
             android:text="@string/label_pilih_outlet"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/btn_kembali">
 
         <TextView
             android:id="@+id/textView"
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="@string/label_pertanyaan_register_outlet"
             android:textColor="@color/colorGrey"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -59,7 +60,7 @@
             android:layout_marginLeft="2dp"
             android:text="@string/label_register_outlet"
             android:textColor="@color/colorBluLight"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -74,14 +75,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_outlet"
-        tools:listitem="@layout/item_outlet"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btn_register"
+        tools:listitem="@layout/item_outlet" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

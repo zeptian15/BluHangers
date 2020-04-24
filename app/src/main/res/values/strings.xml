@@ -20,4 +20,7 @@
     <string name="label_pilih_outlet">Pilih Outlet</string>
     <string name="label_pertanyaan_register_outlet">Tidak menemukan outlet kamu ?</string>
     <string name="label_register_outlet">Register Outlet</string>
+    <string name="label_nama_outlet">Nama Outlet</string>
+    <string name="label_telepon_oulet">No Telepon Outlet</string>
+    <string name="label_alamat_outlet">Alamat Outlet</string>
 </resources>

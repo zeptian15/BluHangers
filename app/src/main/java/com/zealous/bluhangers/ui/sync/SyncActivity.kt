@@ -1,23 +1,20 @@
 package com.zealous.bluhangers.ui.sync
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.zealous.bluhangers.R
 import com.zealous.bluhangers.ui.auth.LoginActivity
-import com.zealous.bluhangers.utils.Constants.NODE_USERS
+import com.zealous.bluhangers.ui.outlet.FormOutletActivity
 import com.zealous.bluhangers.utils.toast
 import kotlinx.android.synthetic.main.activity_sync.*
 
 class SyncActivity : AppCompatActivity() {
 
     private lateinit var viewModel: SyncViewModel
-    private var dbAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,21 +28,25 @@ class SyncActivity : AppCompatActivity() {
 
         // Observe User
         viewModel.user.observe(this, Observer { user ->
-            if(user.id_outlet == 0){
-                val message = "Hallo, ${user.nickName} pilih dulu outletnya yaa!"
-                toast(message)
+            if(user != null){
+                user.id_outlet?.let { checkOutletStatus(it) }
             } else {
-                toast("Ente masuk dashboard gan")
+                toast("Berhasil masuk dashboard")
             }
         })
 
         btn_sinkronisasi_outlet.setOnClickListener {
-            dbAuth.signOut()
-            Intent(this@SyncActivity, LoginActivity::class.java).also {
-                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            Intent(this@SyncActivity, SyncOutletActivity::class.java).also {
                 startActivity(it)
             }
-            finish()
+        }
+    }
+
+    private fun checkOutletStatus(id: Int){
+        if(id == 0){
+            toast("Silahkan pilih outlet terlebih dahulu")
+        } else {
+            toast("Berhasil masuk ke Dashboard")
         }
     }
 }
