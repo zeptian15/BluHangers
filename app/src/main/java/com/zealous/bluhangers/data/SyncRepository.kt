@@ -31,6 +31,8 @@ class SyncRepository : SyncDataSource {
         })
     }
 
+
+
     override fun loadRealtime(callback: SyncDataSource.loadRealtimeCallback) {
         mOutletRef.addChildEventListener(object : ChildEventListener {
             override fun onCancelled(error: DatabaseError) {
@@ -58,6 +60,25 @@ class SyncRepository : SyncDataSource {
                 outlet?.id = snapshot.key
                 outlet?.isDeleted = true
                 callback.onAdded(outlet!!)
+            }
+
+        })
+    }
+
+    override fun loadOutlet(callback: SyncDataSource.loadOutletCallback) {
+        mOutletRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+                callback.onFailure(error.message)
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                    val outlets = ArrayList<Outlet>()
+                    for (dataSnapshot in snapshot.children){
+                        val outlet = dataSnapshot.getValue(Outlet::class.java)
+                        outlet?.id = dataSnapshot.key
+                        outlets.add(outlet!!)
+                    }
+                    callback.onSuccess(outlets)
             }
 
         })

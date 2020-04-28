@@ -93,6 +93,10 @@ class FormOutletActivity : AppCompatActivity(), OutletListener, KodeinAware {
         }
     }
 
+    override fun onFinish() {
+        finish()
+    }
+
     private fun getFileExtension(uri: Uri): String? {
         val cr = contentResolver
         val mime = MimeTypeMap.getSingleton()

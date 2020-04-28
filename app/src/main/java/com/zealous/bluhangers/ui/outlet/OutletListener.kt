@@ -6,4 +6,5 @@ interface OutletListener {
     fun onFailure(error: String)
     fun onError(error: String)
     fun onPickImage()
+    fun onFinish()
 }

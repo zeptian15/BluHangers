@@ -43,6 +43,21 @@ class SyncViewModel(
         }
     }
 
+    fun loadOutlet(){
+        Coroutines.main {
+            repository.loadOutlet(object : SyncDataSource.loadOutletCallback {
+                override fun onSuccess(outlets: ArrayList<Outlet>) {
+                        _outlets.postValue(outlets as ArrayList<Outlet>?)
+                }
+
+                override fun onFailure(error: String) {
+                    syncOutletListener?.onError(error)
+                }
+
+            })
+        }
+    }
+
     fun loadRealtime(){
         Coroutines.main {
             repository.loadRealtime(object : SyncDataSource.loadRealtimeCallback {

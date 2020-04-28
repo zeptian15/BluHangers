@@ -3,6 +3,8 @@ package com.zealous.bluhangers.ui.sync.outlet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,13 +37,28 @@ class SyncOutletActivity : AppCompatActivity(),
         viewModel.syncOutletListener = this
 
         loadingDialog = LoadingDialog(this)
+        viewModel.loadOutlet()
         viewModel.loadRealtime()
+        loadingDialog.showDialog()
+
         adapterOutlet = SyncOutletAdapter()
         setupRecyclerview()
 
+        viewModel.outlets.observe(this, Observer {
+            if (it.size > 0){
+                loadingDialog.hideDialog()
+                showEmptyView(false)
+                adapterOutlet.setListOutlet(it)
+            } else {
+                loadingDialog.hideDialog()
+                showEmptyView(true)
+            }
+        })
+
         viewModel.outlet.observe(this, Observer {
-            if(it != null){
+            if (it != null){
                 adapterOutlet.addOutlet(it)
+                checkItem(adapterOutlet.getItem())
             }
         })
     }
@@ -71,5 +88,21 @@ class SyncOutletActivity : AppCompatActivity(),
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    private fun checkItem(item: Int){
+        if(item > 0){
+            showEmptyView(false)
+        } else {
+            showEmptyView(true)
+        }
+    }
+
+    private fun showEmptyView(show: Boolean){
+        if(show){
+            empty_data_view.visibility = View.VISIBLE
+        } else {
+            empty_data_view.visibility = View.GONE
+        }
     }
 }

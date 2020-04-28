@@ -56,4 +56,6 @@ class SyncOutletAdapter : RecyclerView.Adapter<SyncOutletAdapter.SyncOutletViewH
         }
         notifyDataSetChanged()
     }
+
+    fun getItem() : Int = this.listOutlet.size
 }

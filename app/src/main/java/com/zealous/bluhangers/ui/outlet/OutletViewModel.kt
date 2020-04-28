@@ -33,6 +33,10 @@ class OutletViewModel(
         outletListener?.onPickImage()
     }
 
+    fun onBack(){
+        outletListener?.onFinish()
+    }
+
     // Initialize Firebase Storage and Firebase Database
     fun addOutlet() {
         outletListener?.onStarted()
