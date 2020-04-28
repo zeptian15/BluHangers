@@ -23,4 +23,5 @@
     <string name="label_nama_outlet">Nama Outlet</string>
     <string name="label_telepon_oulet">No Telepon Outlet</string>
     <string name="label_alamat_outlet">Alamat Outlet</string>
+    <string name="label_no_data">Opps belum ada data nih!</string>
 </resources>

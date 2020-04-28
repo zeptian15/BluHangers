@@ -1,47 +1,88 @@
 package com.zealous.bluhangers.ui.sync
 
-import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.zealous.bluhangers.data.models.User
-import com.zealous.bluhangers.utils.Constants.NODE_USERS
-import com.zealous.bluhangers.utils.toast
-import java.lang.Exception
+import com.zealous.bluhangers.data.SyncRepository
+import com.zealous.bluhangers.data.model.Outlet
+import com.zealous.bluhangers.data.model.User
+import com.zealous.bluhangers.data.source.SyncDataSource
+import com.zealous.bluhangers.ui.sync.outlet.SyncOutletListener
+import com.zealous.bluhangers.utils.Constants.DEFAULT_OUTLET
+import com.zealous.bluhangers.utils.Coroutines
+import java.util.*
+import kotlin.collections.ArrayList
 
-class SyncViewModel : ViewModel() {
+class SyncViewModel(
+    private val repository: SyncRepository
+) : ViewModel() {
 
-    private var _user = MutableLiveData<User>()
-    val user: LiveData<User>
-        get() = _user
+    private var _outlets = MutableLiveData<ArrayList<Outlet>>()
+    val outlets: LiveData<ArrayList<Outlet>>
+        get() = _outlets
 
-    private val _result = MutableLiveData<Exception?>()
-    val result: LiveData<Exception?>
-        get() = _result
+    private var _outlet = MutableLiveData<Outlet>()
+    val outlet: LiveData<Outlet>
+        get() = _outlet
 
-    // Firebase Instance
-    private val dbUser = FirebaseDatabase.getInstance().getReference(NODE_USERS)
-    private val currentUserUID = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    var syncOutletListener: SyncOutletListener? = null
+    var syncListener: SyncListener? = null
 
     fun fetchUser() {
-        dbUser.child(currentUserUID)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    // Do Nothing
+        Coroutines.main {
+            repository.loadUser(object: SyncDataSource.loadUserCallback {
+                override fun onSuccess(user: User) {
+                    user.id_outlet?.let { checkOutlet(it) }
                 }
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        _user.value = snapshot.getValue(User::class.java)
-                    }
+                override fun onFailure(error: String) {
+                    syncListener?.onFailure(error)
                 }
 
             })
+        }
+    }
+
+    fun loadRealtime(){
+        Coroutines.main {
+            repository.loadRealtime(object : SyncDataSource.loadRealtimeCallback {
+                override fun onAdded(outlet: Outlet) {
+                    _outlet.value = outlet
+                }
+
+                override fun onUpdated(outlet: Outlet) {
+                    _outlet.value = outlet
+                }
+
+                override fun onDeleted(outlet: Outlet) {
+                    _outlet.value = outlet
+                }
+
+                override fun onFailure(error: String) {
+                    syncOutletListener?.onError(error)
+                }
+
+            })
+        }
+    }
+
+    fun toRegisterOutlet(){
+        syncOutletListener?.toRegister()
+    }
+
+    fun back(){
+        syncOutletListener?.onFinish()
+    }
+
+    private fun checkOutlet(userOutlet: String){
+        if(userOutlet == DEFAULT_OUTLET){
+            syncListener?.onOutletNotExist()
+        } else {
+            syncListener?.onOutletExist()
+        }
+    }
+
+    fun toSyncOutlet(){
+        syncListener?.toSyncOutlet()
     }
 }

@@ -1,4 +1,4 @@
-package com.zealous.bluhangers.data.models
+package com.zealous.bluhangers.data.model
 
 import com.google.firebase.database.Exclude
 
@@ -8,6 +8,7 @@ data class User (
     var fullName: String? = null,
     var nickName: String? = null,
     var email: String? = null,
-    var id_outlet: Int? = null,
+    var password: String? = null,
+    var id_outlet: String? = null,
     var role: String? = null
 )

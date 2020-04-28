@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.zealous.bluhangers.R
 import androidx.lifecycle.Observer
-import com.zealous.bluhangers.ui.auth.LoginActivity
+import com.zealous.bluhangers.ui.auth.login.LoginActivity
 import com.zealous.bluhangers.ui.sync.SyncActivity
+import com.zealous.bluhangers.utils.Constants.DEFAULT_OUTLET
 import com.zealous.bluhangers.utils.Constants.SPLASH_TIMEOUT
 import com.zealous.bluhangers.utils.toast
 
@@ -43,8 +44,8 @@ class SplashActivity : AppCompatActivity() {
         }, SPLASH_TIMEOUT)
     }
 
-    private fun checkOutletStatus(id: Int){
-        if(id == 0){
+    private fun checkOutletStatus(id: String){
+        if(id == DEFAULT_OUTLET){
             Intent(this@SplashActivity, SyncActivity::class.java).also {
                 startActivity(it)
             }

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".BluHangerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,14 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.outlet.FormOutletActivity"></activity>
-        <activity android:name=".ui.sync.SyncOutletActivity" />
+        <activity android:name=".ui.sync.outlet.SyncOutletActivity" />
         <activity android:name=".ui.sync.SyncActivity" />
         <activity
-            android:name=".ui.auth.RegisterActivity"
+            android:name=".ui.auth.register.RegisterActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.auth.LoginActivity"
+            android:name=".ui.auth.login.LoginActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
